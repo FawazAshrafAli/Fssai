@@ -1,0 +1,160 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FSSAI Home</title>
+
+  <link rel="stylesheet" href="{% static 'css/enquire.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style.min.css' %}">  
+</head>
+
+<body>
+
+
+ <div class="enquire" style=" background:#f8f9fa; ">	
+	<div id="message-div">
+		{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+					<p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</p>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+
+<form style="padding-top:20px;" name="contactForm" method="post" id="contactForm" action="" novalidate>
+	{% csrf_token %}
+<ul class="list-unstyle">
+<li>
+<input required="" class="textbox required" id="Name" name="name" placeholder="Your Name:" value="" type="text">
+</li>
+<li>
+<input required="" class="textbox required email" id="email" name="email" placeholder="Your Email ID:" value="" type="text">
+</li>
+<li>
+<input required="" name="phone" class="textbox required" placeholder="Phone Number:" value="" type="text"></li>
+
+<li>
+<input required="" class="textbox" id="location" name="location" style="padding-top:0;" placeholder="Your Location:" value="" type="text">
+</li>
+<li>
+<select class="select"  name="fssaiindia" id="fssaiindia">
+<option value="none" selected="selected" hidden="" disabled="">--Select Registration--</option>
+<option value="Basic FSSAI Registration">Basic FSSAI Registration</option>
+<option value="State FSSAI License Registration">State FSSAI License Registration</option>
+<option value="Central FSSAI License Registration">Central FSSAI License Registration</option>
+<option value="Basic FSSAI Renewal">Basic FSSAI Renewal</option>
+<option value="State FSSAI License Renewal">State FSSAI License Renewal</option>
+<option value="Central FSSAI License Renewal">Central FSSAI License Renewal</option>
+<option value="APEDA License Registration">APEDA License Registration</option>
+<option value="FSSAI Registration for Food Business Operators - FBO">FSSAI Registration for Food Business Operators - FBO</option>
+<option value="FSSAI Registration for Food Marketing Company">FSSAI Registration for Food Marketing Company</option>
+<option value="FSSAI Registration for Wholesalers">FSSAI Registration for Wholesalers</option>
+<option value="FSSAI Registration for Tea Powder Manufacturers">FSSAI Registration for Tea Powder Manufacturers</option>
+<option value="FSSAI Registration for Coffee Powder">FSSAI Registration for Coffee Powder</option>
+<option value="FSSAI Registration for Railway Premises">FSSAI Registration for Railway Premises</option>
+<option value="FSSAI Registration for Essential Food Products">FSSAI Registration for Essential Food Products</option>
+<option value="FSSAI Registration for Online Home Kitchen">FSSAI Registration for Online Home Kitchen</option>
+<option value="FSSAI Registration for Food Vending Machine">FSSAI Registration for Food Vending Machine</option>
+<option value="FSSAI Registration for Herbalife Products">FSSAI Registration for Herbalife Products</option>
+<option value="FSSAI Registration for Importers">FSSAI Registration for Importers</option>
+<option value="FSSAI Registration for Airport Premises">FSSAI Registration for Airport Premises</option>
+<option value="FSSAI Registration for Cashew Exporters">FSSAI Registration for Cashew Exporters</option>
+<option value="FSSAI Registration for Amazon Warehouses">FSSAI Registration for Amazon Warehouses</option>
+<option value="FSSAI Registration for Hotels">FSSAI Registration for Hotels</option>
+<option value="FSSAI Registration for Restaurants">FSSAI Registration for Restaurants</option>
+<option value="FSSAI Registration for Supermarket">FSSAI Registration for Supermarket</option>
+<option value="FSSAI Registration for Zomato">FSSAI Registration for Zomato</option>
+<option value="FSSAI Registration for Swiggy">FSSAI Registration for Swiggy</option>
+<option value="FSSAI Registration for Uber Eats">FSSAI Registration for Uber Eats</option>
+<option value="FSSAI Registration for Amazon Sellers">FSSAI Registration for Amazon Sellers</option>
+<option value="FSSAI Registration for Foodpanda">FSSAI Registration for Foodpanda</option>
+<option value="FSSAI Registration for Flipkart Sellers">FSSAI Registration for Flipkart Sellers</option>
+<option value="FSSAI Registration for Online Sellers">FSSAI Registration for Online Sellers</option>
+<option value="FSSAI Registration for Catering">FSSAI Registration for Catering</option>
+<option value="FSSAI Registration for Events Management">FSSAI Registration for Events Management</option>
+<option value="FSSAI Registration for College">FSSAI Registration for College</option>
+<option value="FSSAI Registration for Fish Retailers">FSSAI Registration for Fish Retailers</option>
+<option value="FSSAI Registration for Fish Exporters">FSSAI Registration for Fish Exporters</option>
+<option value="FSSAI Registration for Agricultural Products">FSSAI Registration for Agricultural Products</option>
+<option value="FSSAI Registration for Chips Manufacturers">FSSAI Registration for Chips Manufacturers</option>
+<option value="FSSAI Registration for Coconut Oil Manufacturers">FSSAI Registration for Coconut Oil Manufacturers</option>
+<option value="FSSAI Registration for Olive oil Manufacturers">FSSAI Registration for Olive oil Manufacturers</option>
+<option value="FSSAI Registration for School">FSSAI Registration for School</option>
+<option value="FSSAI Registration for E-Commerce">FSSAI Registration for E-Commerce</option>
+<option value="FSSAI Registration for Pizza &amp; Sandwich Outlets">FSSAI Registration for Pizza &amp; Sandwich Outlets</option>
+<option value="FSSAI Registration for Spices Company">FSSAI Registration for Spices Company</option>
+<option value="FSSAI Registration for Bar &amp; Beverages">FSSAI Registration for Bar &amp; Beverages</option>
+<option value="FSSAI Registration for Coffee Shop">FSSAI Registration for Coffee Shop</option>
+<option value="FSSAI Registration for Vehicle Food Business">FSSAI Registration for Vehicle Food Business</option>
+<option value="FSSAI Registration for Packaged Drinking Water Company">FSSAI Registration for Packaged Drinking Water Company</option>
+<option value="FSSAI Registration for Juice Shop">FSSAI Registration for Juice Shop</option>
+<option value="FSSAI Registration for Cake Manufacturers">FSSAI Registration for Cake Manufacturers</option>
+<option value="FSSAI Registration for Hospitals">FSSAI Registration for Hospitals</option>
+<option value="FSSAI Registration for Food Manufacturers">FSSAI Registration for Food Manufacturers</option>
+<option value="FSSAI Registration for Food Importers &amp; Exporters">FSSAI Registration for Food Importers &amp; Exporters</option>
+<option value="FSSAI Registration for Corporate Companies">FSSAI Registration for Corporate Companies</option>
+<option value="FSSAI Registration for Sweet Manufacturers">FSSAI Registration for Sweet Manufacturers</option>
+<option value="FSSAI Registration for Vegetables Dealers">FSSAI Registration for Vegetables Dealers</option>
+<option value="FSSAI Registration for Fruits Dealers">FSSAI Registration for Fruits Dealers</option>
+<option value="FSSAI Registration for Dairy Product Manufacturers">FSSAI Registration for Dairy Product Manufacturers</option>
+<option value="FSSAI Registration for Vegetables importers">FSSAI Registration for Vegetables importers</option>
+<option value="FSSAI Registration for Fruits Importers">FSSAI Registration for Fruits Importers</option>
+<option value="FSSAI Registration for Grocery">FSSAI Registration for Grocery</option>
+<option value="FSSAI Registration for Chocolate Manufacturers">FSSAI Registration for Chocolate Manufacturers</option>
+<option value="FSSAI Registration for Vegetables Exporters">FSSAI Registration for Vegetables Exporters</option>
+<option value="FSSAI Registration for Fruits Exporters">FSSAI Registration for Fruits Exporters</option>
+<option value="FSSAI Registration for Home Based Food Business">FSSAI Registration for Home Based Food Business</option>
+<option value="FSSAI Registration for Bakery Products">FSSAI Registration for Bakery Products</option>
+<option value="FSSAI Registration for Meat Shop">FSSAI Registration for Meat Shop</option>
+<option value="FSSAI Registration for Mess">FSSAI Registration for Mess</option>
+<option value="FSSAI Registration for Canteen">FSSAI Registration for Canteen</option>
+<option value="FSSAI Registration for Food Transporters">FSSAI Registration for Food Transporters</option>
+<option value="FSSAI Registration for Hypermarket">FSSAI Registration for Hypermarket</option>
+<option value="FSSAI Registration for Repackers">FSSAI Registration for Repackers</option>
+<option value="FSSAI Registration for Small Food Manufacturing Unit">FSSAI Registration for Small Food Manufacturing Unit</option>
+<option value="FSSAI Registration for Milk Chilling Units">FSSAI Registration for Milk Chilling Units</option>
+<option value="Other License Registration">Other License Registration</option>
+</select>
+</li>
+
+<li>
+<textarea placeholder="Requirements" name="message" id="message" class="textarea required text" cols="" rows=""></textarea>
+</li>
+
+<input type="hidden" id="enquire4" name="enquire" value="GENERAL">
+<li class="gst_enquiry_submit"><input class="btn btn-dark btn-rounded btn-4 font-weight-semibold text-0" style=" display:block; padding:8px 20px 8px 20px; text-align:center;" value="SUBMIT !" type="submit" name="btn">
+<div style="clear:both;"></div>
+<input type="hidden" id="submit" name="submit" value="submit">
+ 
+</li>
+</ul>
+</form>
+</div>
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/validate.js' %}"></script>
+<script>window.jQuery || document.write('  <script src="{% static 'js/jquery-1.6.3.min.js' %}"><\/script>  ')</script>
+<script src="{% static 'js/jquery.infieldlabel.min.js' %}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+		$(function(){ $("label").inFieldLabels(); });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+$('#contactForm').validate({
+			errorPlacement:function(){
+			},
+			highlight: function(element, errorClass, validClass) {
+				$(element).parent('li').addClass('error');
+			},
+			unhighlight: function(element, errorClass, validClass) {
+				$(element).parent('li').removeClass('error');
+			}
+		
+	});
+});
+</script>
+</body>
+</html>

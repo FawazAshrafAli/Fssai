@@ -1,0 +1,263 @@
+﻿{% load static %}
+<!doctype html>
+<html class="no-js " lang="en">
+
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>FSSAI Admin - Login</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!--  -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+<!--  -->
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/style.min.css' %}">
+</head>
+
+<body class="theme-blush">
+
+<!-- Main Content -->
+<section class="content" style="margin:0;">
+
+ <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+        <h2>ENQUIRY LIST</h2>        
+          <div class="i_action d-flex justify-content-between align-items-center" style="padding-bottom:20px;">
+            <div class="">
+                <!-- <div class="checkbox simple d-inline-block mr-3">
+                    <input id="mc0" type="checkbox">
+                    <label for="mc0"></label>
+                </div> -->
+                <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-outline-secondary btn-sm"><i class="zmdi zmdi-refresh"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-outline-secondary btn-sm"><i class="zmdi zmdi-archive"></i></a>
+                    
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Labels</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="javascript:void(0);">UI Project</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Marketing</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Payout</a>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</button>                                        
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'reset_password' %}">Password Reset</a>
+                            
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>                                
+            <div class="pagination-email">
+                <span>{{ registrations_page.number }}/{{ registrations_page.paginator.num_pages }}</span>
+                <div class="btn-group ml-3 d-flex">
+                    {% if registrations_page.has_previous %}
+                    <a href="?page={{ registrations_page.previous_page_number }}" class="btn btn-outline-secondary btn-sm"><i class="zmdi zmdi-chevron-left"></i></a>
+                    {% endif %}
+                    {% if registrations_page.has_next %}
+                    <a href="?page={{ registrations_page.next_page_number }}" class="btn btn-outline-secondary btn-sm"><i class="zmdi zmdi-chevron-right"></i></a>
+                    {% endif %}
+                </div>
+            </div>                                
+        </div>                                      
+            <div class="panel-group table-responsive" id="accordion_1" role="tablist" aria-multiselectable="true">
+                <div id="message-div">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</p>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                {% for item in registrations_page %}
+                <div class="panel panel-primary">                
+                    <div>
+                        <div class="panel-heading" role="tab" id="headingOne_{{item.pk}}">
+                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_{{item.pk}}" aria-expanded="true" aria-controls="{collapseOne_1}"> 
+                                <table class="table table-hover c_table theme-color" id="table_{{item.pk}}">
+                                    <tbody>
+                                        <tr> 
+                                            <td><strong>{{item.name}}</strong></td>   
+                                            <td><strong>{{item.registration}}</strong></td>                                        
+                                            <td class="time">{{item.submission_time}}</td>
+                                            <td>{{item.submission_date}}</td>
+                                            <td><button id="is-read_{{item.pk}}" {% if item.read is True %} class="btn btn-primary text-light" {% else %} class="btn btn-success text-light" {% endif %}>{% if item.read is True %} Read {% else %} Unread {% endif %}</button></td>
+                                        </tr>
+                                    </tbody>                                 
+                                </table>         
+                            </h4>
+                        </div>
+
+                        <button class="btn btn-danger" onclick="document.getElementById('confirm-deletion_{{item.pk}}').style.display='block'">Delete</button>                        
+                        </div>   
+
+                        <div id="collapseOne_{{item.pk}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne_{{item.pk}}">
+                            <div class="panel-body">                               
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>NAME</strong></td>
+                                                <td>{{item.name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>E-MAIL ID</strong></td>
+                                                <td><a target="_blank" href="mailto:{{item.email}}" onclick="event.stopPropagation();">{{item.email}}</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>PHONE NO.</strong></td>                            
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-6"><a target="_blank" href="tel:{{item.phoneNumber}}" onclick="event.stopPropagation();">{{item.phoneNumber}}</a></div> 
+                                                        <div class="col-md-6" style="text-align:right; ">                                                            
+                                                            <a target="_blank" href="https://api.whatsapp.com/send?phone=91{{item.phoneNumber}}" style="background:#09B41C; padding:5px 10px; border-radius:10px; color:#FFFFFF;" onclick="event.stopPropagation();"><i class="zmdi zmdi-hc-fw"></i> <span>whatsapp</span></a>
+                                                            {% comment %} <a target="_blank" href="https://wa.me/91{{item.phoneNumber}}" style="background:#09B41C; padding:5px 10px; border-radius:10px; color:#FFFFFF;" onclick="event.stopPropagation();"  ><i class="zmdi zmdi-hc-fw"></i> <span>whatsapp</span></a> {% endcomment %}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>LOCATION</strong></td>
+                                                <td>{{item.location}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>REGISTRATION</strong></td>
+                                                <td>{{item.registration}}</td>
+                                            </tr>
+                                                <tr>
+                                                <td><strong>REQUIREMENTS</strong></td>
+                                                <td>{{item.requirement}}</td>
+                                            </tr>                                    
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute border shadow shadow-danger px-3 pt-3" id="confirm-deletion_{{item.pk}}" style="display: none; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                        <h4 class="text-danger">Deleting Enquiry.</h4>
+                        <hr/>
+                        <h6>Are your sure?</h6>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-success text-light" data-dismiss="modal" onclick="document.getElementById('confirm-deletion_{{item.pk}}').style.display='none'" style="width: 75px;">Cancel</button>
+                            <a class="btn btn-danger text-light"  href="{% url 'delete' item.pk %}" style="width: 75px;">Delete</a>
+                        </div>
+                    </div>                
+                {% endfor %}                                
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+<script>
+    // Get a reference to the div
+    var timeoutDiv = document.getElementById("message-div");
+
+    // Set a timeout to hide the div after 3000 milliseconds (3 seconds)
+    setTimeout(function () {
+        timeoutDiv.style.display = "none"; // or use timeoutDiv.remove() to remove the div
+    }, 2000);
+</script>
+
+<!-- Your existing HTML content -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add a click event listener to the div with id 'headingOne_{{item.pk}}'
+        document.querySelectorAll('[id^="headingOne_"]').forEach(function(element) {
+            element.addEventListener('click', function() {
+                // Extract the item's ID from the element's id
+                var itemId = this.id.split('_')[1];
+
+                // Send an AJAX request to update the read status
+                fetch('/opened/' + itemId + '/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Check the status of the response
+                    if (data.status === 'success') {
+                        // Optionally, update the visual style of the clicked element
+                        // For example, change the background color                        
+                        var element_id = 'is-read_' + itemId                        
+                        document.getElementById(element_id).className='btn btn-primary text-light';
+                        document.getElementById(element_id).innerHTML='Read';
+                    } else {
+                        console.error('Failed to update read status:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+</script>
+
+<!-- Unread Method -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add a click event listener to the div with id 'headingOne_{{item.pk}}'
+        document.querySelectorAll('[id^="is-read_"]').forEach(function(element) {
+            element.addEventListener('click', function() {
+                // Extract the item's ID from the element's id
+                var itemId = this.id.split('_')[1];                
+
+                // Send an AJAX request to update the read status                
+                fetch('/unread/' + itemId + '/', {                
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                    },
+                })                
+                .then(response => response.json())
+                .then(data => {
+                    // Check the status of the response
+                    if (data.unread_status === 'success') {
+                        var element_id = 'is-read_' + itemId
+                        var collapse_element = '#collapseOne_' + itemId
+                        // Optionally, update the visual style of the clicked element
+                        // For example, change the background color                        
+                        $(collapse_element).collapse('hide');
+                        document.getElementById(element_id).className='btn btn-success text-light';
+                        document.getElementById(element_id).innerHTML='Unread';
+                    } else {
+                        console.error('Failed to update read status:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+                event.stopPropagation();
+            });
+        });
+    });
+</script>
+
+<!-- Your existing JavaScript content -->
+
+
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+</body>
+
+
+</html>
